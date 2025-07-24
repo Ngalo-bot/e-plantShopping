@@ -7,6 +7,7 @@ function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
+   
 
     const plantsArray = [
         {
@@ -236,6 +237,10 @@ function ProductList({ onHomeClick }) {
         textDecoration: 'none',
     }
 
+    const calculateTotalQuantity = () => {
+        return CartItems ? CartItems.reduce((total, item) => total + item.quantity, 0) : 0;
+         };
+
     const handleHomeClick = (e) => {
         e.preventDefault();
         onHomeClick();
@@ -290,16 +295,16 @@ function ProductList({ onHomeClick }) {
 
                     {plantsArray.map((category, index) => ( // Loop through each category in plantsArray
                         <div key={index}> {/* Unique key for each category div */}
-                           <h1 style={{
-  textAlign: 'center',
-  borderTop: '1px solid #000',
-  borderBottom: '1px solid #000',
-  padding: '10px 0',
-  margin: '20px 0',
-  width: '100%'
-}}>
-  <div>{category.category}</div>
-</h1>
+                            <h1 style={{
+                                textAlign: 'center',
+                                borderTop: '1px solid #000',
+                                borderBottom: '1px solid #000',
+                                padding: '10px 0',
+                                margin: '20px 0',
+                                width: '100%'
+                            }}>
+                                <div>{category.category}</div>
+                            </h1>
                             <div className="product-list"> {/* Container for the list of plant cards */}
                                 {category.plants.map((plant, plantIndex) => ( // Loop through each plant in the current category
                                     <div className="product-card" key={plantIndex}> {/* Unique key for each plant card */}
